@@ -44,3 +44,42 @@ list.c:141:10: error: request for member 'prev' in something not a structure or 
 cc1.exe: all warnings being treated as errors
 Compilation failed
 bc6535a
+Thu, Mar 27, 2025  7:57:27 PM: 
+ list.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+In file included from test.c:5:
+list.c: In function 'popCurrent':
+list.c:132:23: error: dereferencing 'void *' pointer [-Werror]
+  132 |     if (node_to_delete->left != NULL) {
+      |                       ^~
+list.c:132:23: error: request for member 'left' in something not a structure or union
+list.c:133:30: error: dereferencing 'void *' pointer [-Werror]
+  133 |         left = node_to_delete->prev;
+      |                              ^~
+list.c:133:30: error: request for member 'prev' in something not a structure or union
+list.c:136:23: error: dereferencing 'void *' pointer [-Werror]
+  136 |     if (node_to_delete->next != NULL) {
+      |                       ^~
+list.c:136:23: error: request for member 'next' in something not a structure or union
+list.c:137:31: error: dereferencing 'void *' pointer [-Werror]
+  137 |         right = node_to_delete->next;
+      |                               ^~
+list.c:137:31: error: request for member 'next' in something not a structure or union
+list.c:140:9: error: dereferencing 'void *' pointer [-Werror]
+  140 |     left->next = right;
+      |         ^~
+list.c:140:9: error: request for member 'next' in something not a structure or union
+list.c:141:10: error: dereferencing 'void *' pointer [-Werror]
+  141 |     right->prev = left;
+      |          ^~
+list.c:141:10: error: request for member 'prev' in something not a structure or union
+list.c:144:26: error: dereferencing 'void *' pointer [-Werror]
+  144 |     return node_to_delete->data;
+      |                          ^~
+list.c:144:26: error: request for member 'data' in something not a structure or union
+list.c:145:1: error: control reaches end of non-void function [-Werror=return-type]
+  145 | }
+      | ^
+cc1.exe: all warnings being treated as errors
+Compilation failed
+9fb817c
