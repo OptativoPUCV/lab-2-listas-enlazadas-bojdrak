@@ -122,9 +122,9 @@ void * popBack(List * list) {
 }
 
 void * popCurrent(List * list) {
-    void * node_to_delete = list->current;
-    void * left = NULL;
-    void * right = NULL;
+    Node * node_to_delete = list->current;
+    Node * left = NULL;
+    Node * right = NULL;
 
     if (node_to_delete->prev != NULL) {
         left = node_to_delete->prev;
