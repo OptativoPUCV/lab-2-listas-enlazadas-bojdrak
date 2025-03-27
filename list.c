@@ -94,6 +94,21 @@ void pushBack(List * list, void * data) {
 }
 
 void pushCurrent(List * list, void * data) {
+    Node * new_node = createNode(data);
+    if (list->current == NULL) {
+        list->head = new_node;
+        list->tail = new_node;
+    } else {
+        new_node->next = list->current->next;
+        new_node->prev = list->current;
+        if (list->current->next != NULL) {
+            list->current->next->prev = new_node;
+        } else {
+            list->tail = new_node;
+        }
+        list->current->next = new_node;
+    }
+    list->current = new_node;
 }
 
 void * popFront(List * list) {
@@ -107,6 +122,26 @@ void * popBack(List * list) {
 }
 
 void * popCurrent(List * list) {
+    if (list->current != NULL) {
+        return NULL;
+    }
+    void * node_to_delete = list->current;
+    void * left = NULL;
+    void * right = NULL;
+
+    if (node_to_delete->left != NULL) {
+        left = node_to_delete->prev;
+    }      
+
+    if (node_to_delete->next != NULL) {
+        right = node_to_delete->next;
+    }
+    // punteros void a null no hacen problema no?      
+    left->next = right;
+    right->prev = left;
+     
+    free(node_to_delete);
+    list->current = NULL;
     return NULL;
 }
 
