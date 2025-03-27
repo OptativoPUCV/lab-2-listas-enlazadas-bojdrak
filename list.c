@@ -133,10 +133,12 @@ void * popCurrent(List * list) {
     if (node_to_delete->next != NULL) {
         right = node_to_delete->next;
     }
-    // punteros void a null no hacen problema no?      
-    left->next = right;
-    right->prev = left;
-     
+
+    if (left != NULL && right != NULL) {
+        left->next = right;
+        right->prev = left;
+    }
+    
     list->current = NULL;
     return node_to_delete->data;
 }
