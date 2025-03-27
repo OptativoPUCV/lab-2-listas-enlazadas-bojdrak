@@ -122,25 +122,37 @@ void * popBack(List * list) {
 }
 
 void * popCurrent(List * list) {
-    Node * node_to_delete = list->current;
-    Node * left = NULL;
-    Node * right = NULL;
-
-    if (node_to_delete->prev != NULL) {
-        left = node_to_delete->prev;
-    }      
-
-    if (node_to_delete->next != NULL) {
-        right = node_to_delete->next;
+    if (list->current == NULL) {
+        return NULL;
     }
 
-    if (left != NULL && right != NULL) {
+    Node * node_to_delete = list->current;
+    void * data = node_to_delete->data;
+
+    Node * left = node_to_delete->prev;
+    Node * right = node_to_delete->next;
+
+
+    if (node_to_delete == list->head) {
+        list->head = right;
+    } else {
         left->next = right;
+    }
+
+    if (node_to_delete == list->tail) {
+        list->tail = left;
+    } else {
         right->prev = left;
     }
-    
-    list->current = NULL;
-    return node_to_delete->data;
+
+    if (right) {
+        list->current = right; 
+    } else {
+        list->current = left;  
+    }
+
+    free(node_to_delete);
+    return data;
 }
 
 void cleanList(List * list) {
